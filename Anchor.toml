@@ -1,0 +1,9 @@
+[provider]
+cluster = "${CLUSTER_URL}"
+wallet = "${ANCHOR_WALLET}"
+
+[programs.localnet]
+my_spl_token = "${PROGRAM_ID}"
+
+[registry]
+url = "https://anchor.projectserum.com"

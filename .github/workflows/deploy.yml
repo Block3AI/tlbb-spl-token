@@ -1,0 +1,28 @@
+name: Deploy SPL Token
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          rustup install stable
+          cargo install anchor-cli --locked
+
+      - name: Deploy program
+        env:
+          ANCHOR_WALLET: ${{ secrets.ANCHOR_WALLET }}
+          CLUSTER_URL: ${{ secrets.CLUSTER_URL }}
+          PROGRAM_ID: ${{ secrets.PROGRAM_ID }}
+        run: |
+          anchor build
+          anchor deploy

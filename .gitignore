@@ -1,0 +1,5 @@
+.env
+target/
+**/target/
+/migrations/*.json
+/programs/**/target/
