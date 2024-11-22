@@ -1,0 +1,23 @@
+[package]
+name = "tlbb_spl_token"
+version = "0.1.0"
+edition = "2021"
+
+# The main entry point for your program
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+anchor-lang = "0.28.0"  # Use the latest Anchor version
+anchor-spl = "0.28.0"   # For interacting with the SPL Token Program
+
+# Standard dependencies for Solana programs
+solana-program = "1.17.0"
+
+# Optionally include logging and testing utilities
+log = "0.4"
+thiserror = "1.0"
+
+[features]
+default = ["no-entrypoint"]
+no-entrypoint = []

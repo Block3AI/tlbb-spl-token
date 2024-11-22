@@ -1,4 +1,4 @@
-name: Deploy SPL Token
+name: Deploy TLBB SPL Token
 
 on:
   push:
@@ -12,13 +12,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up GitHub authentication
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Install dependencies
         run: |
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           rustup install stable
           cargo install anchor-cli --locked
 
-      - name: Deploy program
+      - name: Build and deploy program
         env:
           ANCHOR_WALLET: ${{ secrets.ANCHOR_WALLET }}
           CLUSTER_URL: ${{ secrets.CLUSTER_URL }}
@@ -26,3 +31,9 @@ jobs:
         run: |
           anchor build
           anchor deploy
+
+      - name: Push updated code
+        run: |
+          git add .
+          git commit -m "Deployed latest build"
+          git push origin main
