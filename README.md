@@ -1,5 +1,3 @@
-Here’s a basic README.md template for your project:
-
 # TLBB SPL Token
 
 A Solana-based SPL token built using the Anchor framework. This project implements custom tokenomics and functionality for managing token supply, fees, and distribution.
